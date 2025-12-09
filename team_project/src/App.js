@@ -134,33 +134,32 @@ function App() {
         if (!res.data.features) throw new Error("데이터 구조 오류");
 
         const formattedData = res.data.features.map((feature) => {
-  const p = feature.properties;
-  const guCode = p.gucd || "";
-  return {
-    id: feature.id,
-    name: `자전거 보관소 ${feature.id}`,
-    district: districtMap[guCode] || `구역(${guCode})`,
-    lat:
-      feature.geometry?.coordinates?.[1] != null
-        ? parseFloat(feature.geometry.coordinates[1].toFixed(13))
-        : null,
-    lng:
-      feature.geometry?.coordinates?.[0] != null
-        ? parseFloat(feature.geometry.coordinates[0].toFixed(12))
-        : null,
-    capacity: p.sto_cnt ?? 0,
-    updatedAt: p.update_ymd
-      ? new Date(p.update_ymd).toLocaleDateString()
-      : "",
-    installationDate: p.ist_ymd
-      ? new Date(p.ist_ymd).toLocaleDateString()
-      : "",
-    manager: p.mngt ?? "",
-    roadSegment: p.ridn ?? "",
-    ftcNumber: p.ftc ?? "",
-  };
-});
-
+          const p = feature.properties;
+          const guCode = p.gucd || "";
+          return {
+            id: feature.id,
+            name: `자전거 보관소 ${feature.id}`,
+            district: districtMap[guCode] || `구역(${guCode})`,
+            lat:
+              feature.geometry?.coordinates?.[1] != null
+                ? parseFloat(feature.geometry.coordinates[1].toFixed(13))
+                : null,
+            lng:
+              feature.geometry?.coordinates?.[0] != null
+                ? parseFloat(feature.geometry.coordinates[0].toFixed(12))
+                : null,
+            capacity: p.sto_cnt ?? 0,
+            updatedAt: p.update_ymd
+              ? new Date(p.update_ymd).toLocaleDateString()
+              : "",
+            installationDate: p.ist_ymd
+              ? new Date(p.ist_ymd).toLocaleDateString()
+              : "",
+            manager: p.mngt ?? "",
+            roadSegment: p.ridn ?? "",
+            ftcNumber: p.ftc ?? "",
+          };
+        });
 
         setRacks(formattedData);
         setLoading(false);
@@ -211,7 +210,7 @@ function App() {
     <Background>
       <BrowserRouter>
         <Nav>
-          <Link to="/">🚲 인천 자전거</Link>
+          <Link to="/">🚲인천 자전거</Link>
           <Link to="/list">보관소 찾기</Link>
           <Link to="/my">마이페이지</Link>
 
@@ -288,7 +287,7 @@ function App() {
                     />
                   ) : (
                     <LoginRequiredCard>
-                      <h2>로그인이 필요합니다 🚲</h2>
+                      <h2>로그인이 필요합니다</h2>
                       <p>마이페이지를 이용하려면 로그인이 필요합니다.</p>
                       <button onClick={() => setShowLoginModal(true)}>
                         로그인

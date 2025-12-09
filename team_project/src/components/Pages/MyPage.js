@@ -55,11 +55,11 @@ const FavItem = styled.li`
   background: white;
   border: 1px solid #eee;
   border-radius: 8px;
-  padding: 15px;
-  margin-bottom: 10px;
+  padding: 20px;
+  margin-bottom: 15px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 15px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 `;
 
@@ -69,11 +69,19 @@ const HeaderRow = styled.div`
   align-items: center;
 `;
 
+const MemoWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+`;
+
 const MemoInput = styled.input`
-  width: 100%;
-  padding: 8px;
+  flex: 1;
+  padding: 12px 10px;
   border: 1px solid #ddd;
-  border-radius: 4px;
+  border-radius: 6px;
+  font-size: 1rem;
+  box-sizing: border-box;
 `;
 
 // ================= MyPage Component =================
@@ -137,7 +145,7 @@ const MyPage = ({ favorites = [], racks = [], removeFavorite, updateFavoriteMemo
                       background: "#ff5252",
                       color: "white",
                       border: "none",
-                      padding: "5px 10px",
+                      padding: "6px 12px",
                       borderRadius: "4px",
                       cursor: "pointer",
                     }}
@@ -146,7 +154,7 @@ const MyPage = ({ favorites = [], racks = [], removeFavorite, updateFavoriteMemo
                   </button>
                 </HeaderRow>
 
-                <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                <MemoWrapper>
                   <span style={{ fontSize: "0.9rem", fontWeight: "bold" }}>메모:</span>
                   <MemoInput
                     type="text"
@@ -154,7 +162,7 @@ const MyPage = ({ favorites = [], racks = [], removeFavorite, updateFavoriteMemo
                     value={item.memo}
                     onChange={(e) => updateFavoriteMemo(item.rackId, e.target.value)}
                   />
-                </div>
+                </MemoWrapper>
               </FavItem>
             ))}
           </FavList>
