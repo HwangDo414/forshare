@@ -171,7 +171,7 @@ const RackDetail = ({ racks, onDelete }) => {
                 fontSize: "1rem",
               }}
             >
-              위치 정보가 없습니다.
+              위치 정보가 없습니다
             </div>
           )}
         </div>
