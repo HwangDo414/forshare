@@ -1,4 +1,3 @@
-// App.js
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import axios from "axios";
@@ -47,7 +46,7 @@ const Nav = styled.nav`
 `;
 
 const NavButtonGroup = styled.div`
-  margin-left: auto; /* 오른쪽 정렬 */
+  margin-left: auto;
   display: flex;
   gap: 15px;
 
@@ -135,34 +134,33 @@ function App() {
         if (!res.data.features) throw new Error("데이터 구조 오류");
 
         const formattedData = res.data.features.map((feature) => {
-          const p = feature.properties;
-          const guCode = p.gucd || "";
-          return {
-            id: feature.id,
-            name: `자전거 보관소 ${feature.id}`,
-            district: districtMap[guCode] || `구역(${guCode})`,
-            lat:
-              feature.geometry?.coordinates?.[1] != null
-                ? parseFloat(feature.geometry.coordinates[1].toFixed(13))
-                : null,
-            lng:
-              feature.geometry?.coordinates?.[0] != null
-                ? parseFloat(feature.geometry.coordinates[0].toFixed(12))
-                : null,
-            capacity: p.sto_cnt ?? 0,
-            updatedAt: p.update_ymd
-              ? new Date(p.update_ymd).toLocaleDateString()
-              : "",
-            installationDate: p.ist_ymd
-              ? new Date(p.ist_ymd).toLocaleDateString()
-              : "",
-            manager: p.mngt ?? "",
-            roadSegment: p.ridn ?? "",
-            ftcNumber: p.ftc ?? "",
-            rawProperties: p,
-            rawGeometry: feature.geometry,
-          };
-        });
+  const p = feature.properties;
+  const guCode = p.gucd || "";
+  return {
+    id: feature.id,
+    name: `자전거 보관소 ${feature.id}`,
+    district: districtMap[guCode] || `구역(${guCode})`,
+    lat:
+      feature.geometry?.coordinates?.[1] != null
+        ? parseFloat(feature.geometry.coordinates[1].toFixed(13))
+        : null,
+    lng:
+      feature.geometry?.coordinates?.[0] != null
+        ? parseFloat(feature.geometry.coordinates[0].toFixed(12))
+        : null,
+    capacity: p.sto_cnt ?? 0,
+    updatedAt: p.update_ymd
+      ? new Date(p.update_ymd).toLocaleDateString()
+      : "",
+    installationDate: p.ist_ymd
+      ? new Date(p.ist_ymd).toLocaleDateString()
+      : "",
+    manager: p.mngt ?? "",
+    roadSegment: p.ridn ?? "",
+    ftcNumber: p.ftc ?? "",
+  };
+});
+
 
         setRacks(formattedData);
         setLoading(false);
@@ -172,6 +170,7 @@ function App() {
         setError("데이터를 불러오지 못했습니다.");
         setLoading(false);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // CRUD

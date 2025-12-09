@@ -12,10 +12,10 @@ const RackForm = ({ racks, onCreate, onUpdate }) => {
     capacity: 0,
     lat: null,
     lng: null,
-    mngt: "",
-    ridn: "",
-    ftc: "",
-    ist_ymd: "",
+    manager: "",
+    roadSegment: "",
+    ftcNumber: "",
+    installationDate: "",
   });
 
   useEffect(() => {
@@ -28,12 +28,12 @@ const RackForm = ({ racks, onCreate, onUpdate }) => {
           capacity: target.capacity ?? 0,
           lat: target.lat ?? null,
           lng: target.lng ?? null,
-          mngt: target.manager ?? target.mngt ?? "",
-          ridn: target.roadSegment ?? target.ridn ?? "",
-          ftc: target.ftcNumber ?? target.ftc ?? "",
-          ist_ymd: target.installationDate
+          manager: target.manager ?? "",
+          roadSegment: target.roadSegment ?? "",
+          ftcNumber: target.ftcNumber ?? "",
+          installationDate: target.installationDate
             ? new Date(target.installationDate).toISOString().split("T")[0]
-            : target.ist_ymd ?? "",
+            : "",
         });
       }
     }
@@ -52,6 +52,7 @@ const RackForm = ({ racks, onCreate, onUpdate }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     const payload = {
       ...formData,
       updatedAt: new Date().toISOString().split("T")[0],
@@ -62,7 +63,7 @@ const RackForm = ({ racks, onCreate, onUpdate }) => {
       alert("수정되었습니다. (임시)");
       navigate(`/detail/${id}`);
     } else {
-      onCreate(payload);
+      onCreate({ ...payload, id: Date.now() });
       alert("등록되었습니다. (임시)");
       navigate("/list");
     }
@@ -158,41 +159,41 @@ const RackForm = ({ racks, onCreate, onUpdate }) => {
         </div>
 
         <div>
-          <label style={LabelStyle}>관리 기관 (mngt)</label>
+          <label style={LabelStyle}>관리 기관</label>
           <input
-            name="mngt"
-            value={formData.mngt}
+            name="manager"
+            value={formData.manager}
             onChange={handleChange}
             style={InputStyle}
           />
         </div>
 
         <div>
-          <label style={LabelStyle}>도로 구간 (ridn)</label>
+          <label style={LabelStyle}>도로 구간</label>
           <input
-            name="ridn"
-            value={formData.ridn}
+            name="roadSegment"
+            value={formData.roadSegment}
             onChange={handleChange}
             style={InputStyle}
           />
         </div>
 
         <div>
-          <label style={LabelStyle}>지형지물 번호 (ftc)</label>
+          <label style={LabelStyle}>지형지물 번호</label>
           <input
-            name="ftc"
-            value={formData.ftc}
+            name="ftcNumber"
+            value={formData.ftcNumber}
             onChange={handleChange}
             style={InputStyle}
           />
         </div>
 
         <div>
-          <label style={LabelStyle}>설치일 (ist_ymd)</label>
+          <label style={LabelStyle}>설치일</label>
           <input
             type="date"
-            name="ist_ymd"
-            value={formData.ist_ymd}
+            name="installationDate"
+            value={formData.installationDate}
             onChange={handleChange}
             style={InputStyle}
           />

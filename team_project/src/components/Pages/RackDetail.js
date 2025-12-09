@@ -4,7 +4,6 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 
-// 마커 아이콘 기본 경로 수정
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconRetinaUrl:
@@ -29,12 +28,6 @@ const RackDetail = ({ racks, onDelete }) => {
       </div>
     );
   }
-
-  // 날짜 포맷 함수
-  const formatDate = (date) => {
-    if (!date) return "정보 없음";
-    return new Date(date).toLocaleDateString();
-  };
 
   const handleDelete = () => {
     if (window.confirm("정말 삭제하시겠습니까? (임시 삭제)")) {
@@ -69,7 +62,6 @@ const RackDetail = ({ racks, onDelete }) => {
     fontWeight: "bold",
   };
 
-  // App.js 구조 기준 필드
   const {
     name,
     district,
@@ -81,8 +73,6 @@ const RackDetail = ({ racks, onDelete }) => {
     manager,
     roadSegment,
     ftcNumber,
-    rawProperties,
-    rawGeometry,
   } = rack;
 
   return (
@@ -90,7 +80,6 @@ const RackDetail = ({ racks, onDelete }) => {
       <h2 style={{ color: "#004d40" }}>{name}</h2>
 
       <div style={{ display: "flex", flexWrap: "wrap", gap: "20px" }}>
-        {/* 정보 섹션 */}
         <div style={InfoSection}>
           <p>
             <strong>📍 관리 구역:</strong> {district ?? "정보 없음"}
@@ -146,7 +135,6 @@ const RackDetail = ({ racks, onDelete }) => {
           </div>
         </div>
 
-        {/* 지도 섹션 */}
         <div
           style={{
             width: "400px",
