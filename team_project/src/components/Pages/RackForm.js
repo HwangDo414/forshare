@@ -60,11 +60,11 @@ const RackForm = ({ racks, onCreate, onUpdate }) => {
 
     if (id) {
       onUpdate(id, payload);
-      alert("수정되었습니다. (임시)");
+      alert("수정되었습니다!");
       navigate(`/detail/${id}`);
     } else {
       onCreate({ ...payload, id: Date.now() });
-      alert("등록되었습니다. (임시)");
+      alert("등록되었습니다!");
       navigate("/list");
     }
   };
