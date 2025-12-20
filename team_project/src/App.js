@@ -204,7 +204,10 @@ function App() {
     setUser({ name: username });
     setShowLoginModal(false);
   };
-  const handleLogout = () => setUser(null);
+  const handleLogout = () => {
+    setUser(null);
+    setFavorites([]); // ⭐ 로그아웃 시 즐겨찾기 초기화
+  };
 
   return (
     <Background>
